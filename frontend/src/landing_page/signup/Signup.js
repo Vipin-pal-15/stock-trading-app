@@ -16,7 +16,7 @@ function Signup() {
     .object()
     .shape({
       name: yup.string().required().min(3).max(30),
-      email: yup.string().required().email(),
+      email: yup.string().required().matches(/^[^\s@]+@[^\s]+\.(com|in|org|net)$/,"Enter valid email"),
       password: yup.string().required().min(5).max(20),
     })
     .required();
@@ -63,7 +63,7 @@ function Signup() {
               value="Register"
             ></input>
           </form>
-           <p className="text-center" style={{textDecoration:"none"}}>User already have an account <Link to="/signin">Signin</Link></p>
+           <p className="text-center" style={{textDecoration:"none"}}>User already have an account <Link to="/signin" className="login">Signin</Link></p>
         </div>
         <div className="col-sm-4"></div>
       </div>

@@ -13,7 +13,7 @@ function Signin() {
   const schema = yup
     .object()
     .shape({
-      email: yup.string().required().email(),
+      email: yup.string().required().matches(/^[^\s@]+@[^\s]+\.(com|in|org|net)$/,"Enter valid email"),
       password: yup.string().required().min(5).max(20),
     })
     .required();
@@ -50,9 +50,9 @@ function Signin() {
           <form onSubmit={handleSubmit(handlleRegister)}>
             <h1 className="text-primary text-center">Login here</h1>
             <hr/>
-            <input type="email" style={{border:"none",outline:"none",borderBottom:"2px solid black"}} {...register('email')} className="form-control mb-3" placeholder="Enter Your Email"></input>
+            <input type="email" style={{border:"none",outline:"none",borderBottom:"2px dotted black"}} {...register('email')} className="form-control mb-3" placeholder="Enter Your Email"></input>
              {errors?.email && <p className="text-danger">{errors?.email?.message}</p>}
-            <input type="password" style={{border:"none",outline:"none",borderBottom:"2px solid black"}} {...register('password')} className="form-control mb-3" placeholder="Enter Your Password"></input>
+            <input type="password" style={{border:"none",outline:"none",borderBottom:"2px dotted black"}} {...register('password')} className="form-control mb-3" placeholder="Enter Your Password"></input>
             {errors?.password && <p className="text-danger">{errors?.password?.message}</p>}
             <input
               type="submit"
@@ -60,7 +60,7 @@ function Signin() {
               value="Login"
             ></input>
           </form>
-           <p className="text-center" style={{textDecoration:"none"}}>Don't have an account <Link to="/signup">Signup</Link></p>
+           <p className="text-center" style={{textDecoration:"none"}}>Don't have an account <Link to="/signup" className="login">Signup</Link></p>
         </div>
         <div className="col-sm-4"></div>
       </div>

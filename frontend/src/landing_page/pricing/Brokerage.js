@@ -31,6 +31,16 @@ function Brokerage() {
           <a href="" style={{ textDecoration: "none" }}>
             <h3 className="fs-5">List of charges</h3>
           </a>
+          <ul style={{textAlign:"left",lineHeight:"2.5", fontSize:"12px"}} className="text-muted">
+            <li>
+              Call & Trade and RWS auto-sequareoffAdditional charges of ₹50 + GST per order.
+            </li>
+            <li>Digital contract notes will be sent via e-mail</li>
+            <li>
+              Physical cipies of contract, if required,shall be charged per ₹20 per contract note charges apply.
+            </li>
+            
+          </ul>
         </div>
       </div>
     </div>

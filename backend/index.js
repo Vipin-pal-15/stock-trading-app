@@ -12,17 +12,17 @@ const {OrdersModel} = require("./model/OrdersModel");
 const {userRegister}=require("../backend/model/userModel");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
+const stockRoutes=require("./routes/routes.js");
 
 const PORT = process.env.PORT || 3000;
 const url = process.env.MONGO_URL;
 
 const app=express();
 app.use(express.json())
-
-
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use("/api",stockRoutes)
 // app.get("/addHoldings", async(req,res)=>{
 //     let tempHoldings = [
 //   {

@@ -9,24 +9,25 @@ const Holdings = () => {
   const [allHoldings,setallHoldings]=useState([]);
 
   useEffect(()=>{
-    axios.get("http://localhost:3000/allHoldings").then((res)=>{
+    axios.get("http://localhost:3000/api/stock").then((res)=>{
       setallHoldings(res.data);
     })
   },[])
 
-const labels = allHoldings.map((subArray)=>subArray["name"]);
-
+const labels = allHoldings.map((item)=>item.name);
 const data = {
   labels,
   datasets:[
     {
       label:"Stock Price",
-      data:allHoldings.map((stock)=>stock.price),
+      data:allHoldings.map((stock)=>stock.price !== 'N/A' ? Number(stock.price):0),
       backgroundColor:"rgba(255,99,132,0.5)",
     }
   ]
 }
 
+console.log(labels)
+  console.log("all holdings",allHoldings)
   return (
    <>
    <h3>Holdings ({allHoldings.length})</h3>
@@ -46,18 +47,24 @@ const data = {
         </tr>
 
         {allHoldings.map((stock,index)=>{
-          const curValue=stock.price*stock.qty;
+          const price=Number(stock.price);
+          const curValue=price?price*stock.qty:0;
           const ispProfit=curValue-stock.avg*stock.qty>=0.0;
           const profClass=ispProfit ? "profit":"loss";
-          const dayClass=stock.isLoss ? "loss" : "profit";
+          const dayClass=stock.day.includes("-")?"loss" : "profit";
+
+          // const curValue=stock.price*stock.qty;
+          // const ispProfit=curValue-stock.avg*stock.qty>=0.0;
+          // const profClass=ispProfit ? "profit":"loss";
+          // const dayClass=stock.isLoss ? "loss" : "profit";
 
           return(
-            <tr key={index} >
+          <tr key={index} >
           <td>{stock.name}.</td>
           <td>{stock.qty}</td>
-          <td>{stock.avg.toFixed(2)}. </td>
-          <td>{stock.price.toFixed(2)}</td>
-          <td>{curValue.toFixed(2)}</td>
+          <td>{stock.avg?stock.avg.toFixed(2):"N/A"}. </td>
+          <td>{stock.price !== "N/A" ? Number(stock.price).toFixed(2):"N/A"}</td>
+          <td>{curValue?curValue.toFixed(2):"N/A"}</td>
           <td className={profClass}>{(curValue-stock.avg*stock.qty).toFixed(2)}</td>
           <td className={profClass}>{stock.net}</td>
           <td className={dayClass}>{stock.day}</td>
@@ -82,7 +89,9 @@ const data = {
       </div>
     </div>
    </div>
-   <VerticalGraph data={data}/>
+   <div style={{width:"100%",height:"300px",}}>
+   {allHoldings.length>0 && (<VerticalGraph data={data}/>)}
+   </div>
    </>
   )
 }

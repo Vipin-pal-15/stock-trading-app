@@ -43,7 +43,7 @@ function Signup() {
     <>
       <div className="row">
         <div className="col-sm-4"></div>
-        <div className="col-sm-4 mt-4 " style={{boxShadow:"0 5px 15px",borderRadius:"10px"}}>
+        <div className="col-sm-4 mt-4 " style={{boxShadow:"0 4px 13px",borderRadius:"10px"}}>
           <form onSubmit={handleSubmit(handlleRegister)}>
             <h2 className="text-primary text-center">Contact Us</h2>
             <hr/>
@@ -59,7 +59,7 @@ function Signup() {
               value="Send"
             ></input>
           </form>
-           <p className="text-center" style={{textDecoration:"none"}}>Don't have an account <Link to="/signup">Signup</Link></p>
+           <p className="text-center" style={{textDecoration:"none"}}>Don't have an account <Link to="/signup" className="login">Signup</Link></p>
         </div>
         <div className="col-sm-4"></div>
       </div>

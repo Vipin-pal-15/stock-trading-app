@@ -38,3 +38,11 @@ code {
   border-radius: 10px;
   border: none;
 }
+
+/* //navbar */
+.nav-link:hover{
+  color: #387ed1 !important;
+}
+.login{
+  text-decoration: none;
+}
